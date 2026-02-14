@@ -2,14 +2,17 @@ using UnityEngine;
 
 namespace Game.Player
 {
+    [RequireComponent(typeof(InputListener))]
     public class Player : MonoBehaviour
     {
-        public PlayerStateMachine StateMachine;
+        public PlayerStateMachine StateMachine { get; private set; }
+        public InputListener InputListener { get; private set; }
 
         private void Awake()
         {
             StateMachine = new PlayerStateMachine();
             StateMachine.Debug = true;
+            InputListener = GetComponent<InputListener>();
         }
 
         private void Start()
