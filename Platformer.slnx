@@ -1,4 +1,4 @@
 ﻿<Solution>
+  <Project Path="Game.Player.csproj" />
   <Project Path="Library.FSM.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
 </Solution>

@@ -5,16 +5,9 @@ namespace Library.FSM
         private IState _currentState;
         public bool Debug;
         
-        public void SetState<TState>(State<T> newState) where TState : State<T>
+        public void SetState<TState>(T context) where TState : State<T>
         {
-            TState state = (TState)System.Activator.CreateInstance(typeof(TState), newState);
-            InternalSetState(state);
-        }
-
-        public void SetStateTest(State<T> newState)
-        {
-            var stateType = newState.GetType();
-            State<T> state = (State<T>)System.Activator.CreateInstance(stateType);
+            TState state = (TState)System.Activator.CreateInstance(typeof(TState), context);
             InternalSetState(state);
         }
 

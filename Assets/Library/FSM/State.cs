@@ -9,10 +9,10 @@ namespace Library.FSM
             Context = context;
         }
 
-        public virtual void Enter() {}
+        public abstract void Enter();
 
-        public virtual void Execute() {}
+        public abstract void Execute();
 
-        public virtual void Exit() {}
+        public abstract void Exit();
     }
 }
