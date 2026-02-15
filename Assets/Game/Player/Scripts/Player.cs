@@ -1,3 +1,4 @@
+using Library.FSM;
 using UnityEngine;
 
 namespace Game.Player
@@ -17,7 +18,8 @@ namespace Game.Player
 
         private void Start()
         {
-            StateMachine.SetState<IdleState>(this);
+            State<Player> newState = new IdleState(this);
+            StateMachine.SetState(newState);
         }
 
         private void Update()

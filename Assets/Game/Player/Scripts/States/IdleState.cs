@@ -21,7 +21,11 @@ namespace Game.Player
 
         public override void Execute()
         {
-            
+            if (_direction != Vector2.zero)
+            {
+                State<Player> newState = new RunState(Context, _direction);
+                Context.StateMachine.SetState(newState);
+            }
         }
 
         public override void Exit()
@@ -34,6 +38,8 @@ namespace Game.Player
         private void OnMoved(Vector2 direction)
         {
             _direction = direction;
+            Debug.LogWarning($"Idle, x: {_direction.x}, y: {_direction.y}");
+
         }
 
         private void OnJumped()
