@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5115807335669496290}
   - component: {fileID: 1416250846379402315}
   - component: {fileID: 1367066954787918451}
+  - component: {fileID: -4219270854433339217}
   - component: {fileID: 3423395932188314097}
   - component: {fileID: 817244802775201858}
   m_Layer: 0
@@ -190,6 +191,28 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &-4219270854433339217
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458847796480340899}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21f963fa12c86d04cb81d782ece381f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3423395932188314097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca2bc6066c8e3246b5e33c8537c9849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Player::Game.Player.InputListener
+  Moved:
+    m_PersistentCalls:
+      m_Calls: []
+  Jumped:
+    m_PersistentCalls:
+      m_Calls: []
