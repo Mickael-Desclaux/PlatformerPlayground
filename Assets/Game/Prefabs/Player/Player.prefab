@@ -225,6 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09fe3c6a84059c45ab720e3290eb75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  Sprite: {fileID: 813948706347840424}
+  Speed: 4
 --- !u!114 &817244802775201858
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,8 +38,6 @@ namespace Game.Player
         private void OnMoved(Vector2 direction)
         {
             _direction = direction;
-            Debug.LogWarning($"Idle, x: {_direction.x}, y: {_direction.y}");
-
         }
 
         private void OnJumped()
