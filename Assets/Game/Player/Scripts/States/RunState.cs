@@ -6,11 +6,10 @@ namespace Game.Player
     public class RunState : State<Player>
     {
         private const string _runningAnimation = "isRunning";
-        private Vector2 _direction;
 
         public RunState(Player context, Vector2 currentDirection) : base(context)
         {
-            _direction = currentDirection;
+            Context.Direction = currentDirection;
         }
 
         public override void Enter()
@@ -22,7 +21,7 @@ namespace Game.Player
 
         public override void Execute()
         {
-            if (_direction == Vector2.zero)
+            if (Context.Direction == Vector2.zero)
             {
                 State<Player> newState = new IdleState(Context);
                 Context.StateMachine.SetState(newState);
@@ -30,7 +29,7 @@ namespace Game.Player
 
             float speed = Time.deltaTime * Context.Speed;
             // Need to add an explicit cast as vector3 to makes += work
-            Context.transform.position += (Vector3)_direction * speed;
+            Context.transform.position += (Vector3)Context.Direction * speed;
 
         }
 
@@ -42,12 +41,13 @@ namespace Game.Player
 
         private void OnMoved(Vector2 direction)
         {
-            _direction = direction;
+            Context.Direction = direction;
+            FlipSprite();
         }
 
         private void FlipSprite()
         {
-            Context.Sprite.flipX = _direction.x < 0;
+            Context.Sprite.flipX = Context.Direction.x < 0;
         }
     }
 }
