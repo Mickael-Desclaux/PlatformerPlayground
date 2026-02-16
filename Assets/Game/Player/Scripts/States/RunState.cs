@@ -9,19 +9,20 @@ namespace Game.Player
 
         public RunState(Player context, Vector2 currentDirection) : base(context)
         {
-            Context.Direction = currentDirection;
+            Context.CurrentDirection = currentDirection;
         }
 
         public override void Enter()
         {
             Context.InputListener.Moved.AddListener(OnMoved);
+            Context.InputListener.Jumped.AddListener(OnJumped);
             Context.Animator.SetBool(_runningAnimation, true);
-            FlipSprite();
+            Context.FlipSprite();
         }
 
         public override void Execute()
         {
-            if (Context.Direction == Vector2.zero)
+            if (Context.CurrentDirection == Vector2.zero)
             {
                 State<Player> newState = new IdleState(Context);
                 Context.StateMachine.SetState(newState);
@@ -29,7 +30,7 @@ namespace Game.Player
 
             float speed = Time.deltaTime * Context.Speed;
             // Need to add an explicit cast as vector3 to makes += work
-            Context.transform.position += (Vector3)Context.Direction * speed;
+            Context.transform.position += (Vector3)Context.CurrentDirection * speed;
 
         }
 
@@ -41,13 +42,14 @@ namespace Game.Player
 
         private void OnMoved(Vector2 direction)
         {
-            Context.Direction = direction;
-            FlipSprite();
+            Context.CurrentDirection = direction;
+            Context.FlipSprite();
         }
 
-        private void FlipSprite()
+        private void OnJumped()
         {
-            Context.Sprite.flipX = Context.Direction.x < 0;
+            State<Player> newState = new JumpState(Context);
+            Context.StateMachine.SetState(newState);
         }
     }
 }

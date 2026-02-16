@@ -5,8 +5,6 @@ namespace Game.Player
 {
     public class IdleState : State<Player>
     {
-        private bool _hasJumped;
-
         public IdleState(Player context) : base(context)
         {
             
@@ -21,18 +19,7 @@ namespace Game.Player
 
         public override void Execute()
         {
-            if (_hasJumped)
-            {
-                State<Player> newState = new JumpState(Context, Context.Direction);
-                Context.StateMachine.SetState(newState);
-                return;
-            }
 
-            if (Context.Direction != Vector2.zero)
-            {
-                State<Player> newState = new RunState(Context, Context.Direction);
-                Context.StateMachine.SetState(newState);
-            }
         }
 
         public override void Exit()
@@ -44,12 +31,17 @@ namespace Game.Player
 
         private void OnMoved(Vector2 direction)
         {
-            Context.Direction = direction;
+            if (direction != Vector2.zero)
+            {
+                State<Player> newState = new RunState(Context, direction);
+                Context.StateMachine.SetState(newState);
+            }
         }
 
         private void OnJumped()
         {
-            _hasJumped = true;
+            State<Player> newState = new JumpState(Context);
+            Context.StateMachine.SetState(newState);
         }
     }
 }
