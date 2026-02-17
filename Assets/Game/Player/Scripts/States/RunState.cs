@@ -37,6 +37,7 @@ namespace Game.Player
         public override void Exit()
         {
             Context.InputListener.Moved.RemoveListener(OnMoved);
+            Context.InputListener.Jumped.RemoveListener(OnJumped);
             Context.Animator.SetBool(_runningAnimation, false);
         }
 

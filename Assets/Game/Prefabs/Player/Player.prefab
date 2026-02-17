@@ -226,17 +226,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09fe3c6a84059c45ab720e3290eb75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  Sprite: {fileID: 813948706347840424}
-  Rigidbody2D: {fileID: 1416250846379402315}
   Speed: 4
   JumpForce: 5
-  GroundCheck: {fileID: 7931761258186128671}
-  GroundCheckRadius: 0.2
-  GroundLayerMask:
+  _groundCheck: {fileID: 7931761258186128671}
+  _groundCheckRadius: 0.05
+  _groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   CurrentDirection: {x: 0, y: 0}
-  IsGrounded: 0
 --- !u!114 &817244802775201858
 MonoBehaviour:
   m_ObjectHideFlags: 0

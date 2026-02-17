@@ -1,4 +1,6 @@
 ﻿<Solution>
   <Project Path="Game.Player.csproj" />
+  <Project Path="Libraries.UTools.Editor.csproj" />
   <Project Path="Library.FSM.csproj" />
+  <Project Path="Libraries.UTools.csproj" />
 </Solution>

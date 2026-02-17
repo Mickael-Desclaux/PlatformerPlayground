@@ -1,3 +1,4 @@
+using System.Collections;
 using Library.FSM;
 using UnityEngine;
 
@@ -13,13 +14,24 @@ namespace Game.Player
         public SpriteRenderer Sprite { get; private set; }
         public Rigidbody2D Rigidbody2D { get; private set; }
 
-        public bool IsGrounded { get; private set; }
+        public bool IsGrounded 
+        { 
+            get 
+            {
+                if (!_groundCheck.gameObject.activeInHierarchy)
+                {
+                    return false;
+                }
+
+                return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask);
+            } 
+        }
 
         public float Speed = 8f;
         public float JumpForce = 10f;
-        public Transform GroundCheck;
-        public float GroundCheckRadius = 0.2f;
-        public LayerMask GroundLayerMask;
+        [SerializeField] private Transform _groundCheck;
+        [SerializeField] private float _groundCheckRadius = 0.2f;
+        [SerializeField] private LayerMask _groundLayerMask;
 
         [HideInInspector] public Vector2 CurrentDirection;
 
@@ -41,13 +53,30 @@ namespace Game.Player
 
         private void Update()
         {
-            IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, GroundLayerMask);
             StateMachine.Execute();
+        }
+
+        public void HideGroundCheck()
+        {
+            _groundCheck.gameObject.SetActive(false);
+            StartCoroutine(ShowGroundCheck());
         }
 
         public void FlipSprite()
         {
             Sprite.flipX = CurrentDirection.x < 0;
+        }
+
+        private IEnumerator ShowGroundCheck()
+        {
+            yield return new WaitForSeconds(0.2f);
+            _groundCheck.gameObject.SetActive(true);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = IsGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
         }
     }
 }

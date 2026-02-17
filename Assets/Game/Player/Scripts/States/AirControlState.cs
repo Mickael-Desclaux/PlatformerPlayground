@@ -18,6 +18,7 @@ namespace Game.Player
 
         public override void Execute()
         {
+
             if (Context.IsGrounded && Context.CurrentDirection == Vector2.zero)
             {
                 State<Player> newState = new IdleState(Context);
@@ -29,6 +30,10 @@ namespace Game.Player
                 State<Player> newState = new RunState(Context, Context.CurrentDirection);
                 Context.StateMachine.SetState(newState);
             }
+
+            float speed = Time.deltaTime * Context.Speed;
+            // Need to add an explicit cast as vector3 to makes += work
+            Context.transform.position += (Vector3)Context.CurrentDirection * speed;
         }
 
         public override void Exit()

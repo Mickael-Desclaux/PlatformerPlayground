@@ -5,7 +5,7 @@ namespace Game.Player
 {
     public class JumpState : State<Player>
     {
-        // private const string _jumpAnimation = "hasJumped";
+        private const string _jumpAnimation = "hasJumped";
         
         public JumpState(Player context) : base(context)
         {
@@ -14,7 +14,8 @@ namespace Game.Player
 
         public override void Enter()
         {
-            // Context.Animator.SetBool(_jumpAnimation, true);
+            Context.HideGroundCheck();
+            Context.Animator.SetBool(_jumpAnimation, true);
 
             Context.Rigidbody2D.linearVelocity = new Vector2(Context.Rigidbody2D.linearVelocityX, Context.JumpForce);
             State<Player> newState = new AirControlState(Context, Context.CurrentDirection);
