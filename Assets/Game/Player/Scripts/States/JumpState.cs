@@ -15,7 +15,7 @@ namespace Game.Player
         public override void Enter()
         {
             Context.HideGroundCheck();
-            Context.Animator.SetBool(_jumpAnimation, true);
+            Context.Animator.SetTrigger(_jumpAnimation);
 
             Context.Rigidbody2D.linearVelocity = new Vector2(Context.Rigidbody2D.linearVelocityX, Context.JumpForce);
             State<Player> newState = new AirControlState(Context, Context.CurrentDirection);
