@@ -1,4 +1,3 @@
-using System.Collections;
 using Library.FSM;
 using UnityEngine;
 
@@ -14,18 +13,9 @@ namespace Game.Player
         public SpriteRenderer Sprite { get; private set; }
         public Rigidbody2D Rigidbody2D { get; private set; }
 
-        public bool IsGrounded 
-        { 
-            get 
-            {
-                if (!_groundCheck.gameObject.activeInHierarchy)
-                {
-                    return false;
-                }
+        public bool IsGrounded { get; private set; }
 
-                return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask);
-            } 
-        }
+        private float _groundCheckCooldown;
 
         public float Speed = 8f;
         public float JumpForce = 10f;
@@ -53,24 +43,23 @@ namespace Game.Player
 
         private void Update()
         {
+            if (_groundCheckCooldown > 0f)
+                _groundCheckCooldown -= Time.deltaTime;
+
+            IsGrounded = _groundCheckCooldown <= 0f &&
+                Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask);
+
             StateMachine.Execute();
         }
 
-        public void HideGroundCheck()
+        public void DisableGroundCheckFor(float duration = 0.2f)
         {
-            _groundCheck.gameObject.SetActive(false);
-            StartCoroutine(ShowGroundCheck());
+            _groundCheckCooldown = duration;
         }
 
         public void FlipSprite()
         {
             Sprite.flipX = CurrentDirection.x < 0;
-        }
-
-        private IEnumerator ShowGroundCheck()
-        {
-            yield return new WaitForSeconds(0.2f);
-            _groundCheck.gameObject.SetActive(true);
         }
 
         private void OnDrawGizmosSelected()

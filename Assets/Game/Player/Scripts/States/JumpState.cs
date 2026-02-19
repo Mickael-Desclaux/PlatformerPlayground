@@ -14,7 +14,7 @@ namespace Game.Player
 
         public override void Enter()
         {
-            Context.HideGroundCheck();
+            Context.DisableGroundCheckFor();
             Context.Animator.SetTrigger(_jumpAnimation);
 
             Context.Rigidbody2D.linearVelocity = new Vector2(Context.Rigidbody2D.linearVelocityX, Context.JumpForce);
