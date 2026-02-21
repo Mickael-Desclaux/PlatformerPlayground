@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,6 +8,7 @@ namespace Game.Player
     {
         public UnityEvent<Vector2> Moved;
         public UnityEvent Jumped;
+        public UnityEvent Attacked;
 
         private void OnMove(InputValue value)
         {
@@ -19,6 +19,11 @@ namespace Game.Player
         private void OnJump()
         {
             Jumped?.Invoke();
+        }
+
+        private void OnAttack()
+        {
+            Attacked?.Invoke();
         }
     }
 }
